@@ -1,0 +1,29 @@
+﻿syntax = "proto3";
+option csharp_namespace = "Ratiu_Ruxandra_Proiect.Grpc";
+
+package patient;
+
+service PatientService {
+  rpc GetAll (Empty) returns (PatientList) {}
+  rpc Get (PatientId) returns (PatientMessage) {}
+  rpc Insert (PatientMessage) returns (Empty) {}
+  rpc Delete (PatientId) returns (Empty) {}
+}
+
+message Empty {}
+
+message PatientId {
+  int32 id = 1;
+}
+
+message PatientMessage {
+  int32 patientId = 1;
+  string fullName = 2;
+  string phone = 3;
+  string email = 4;
+  string birthDate = 5; // yyyy-MM-dd (poate fi "" dacă e null)
+}
+
+message PatientList {
+  repeated PatientMessage item = 1;
+}

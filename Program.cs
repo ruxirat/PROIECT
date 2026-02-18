@@ -9,6 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 // =============================
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient<INoShowPredictionService, NoShowPredictionService>(client =>
+{
+    client.BaseAddress = new Uri("https://localhost:51144");
+});
 
 builder.Services.AddDbContext<Ratiu_Ruxandra_ProiectContext>(options =>
     options.UseSqlServer(
@@ -16,7 +20,7 @@ builder.Services.AddDbContext<Ratiu_Ruxandra_ProiectContext>(options =>
         ?? throw new InvalidOperationException("Connection string 'Ratiu_Ruxandra_ProiectContext' not found.")
     )
 );
-builder.Services.AddScoped<INoShowPredictionService, NoShowPredictionService>();
+
 
 
 var app = builder.Build();

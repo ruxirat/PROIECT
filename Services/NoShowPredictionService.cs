@@ -1,39 +1,25 @@
-﻿using Grpc.Net.Client;
-using Ratiu_Ruxandra_Proiect.Models;
+﻿using System.Net.Http;
+using System.Net.Http.Json;
 using System.Threading.Tasks;
-using GrpcService1;
+using Ratiu_Ruxandra_Proiect.Models;
 
 namespace Ratiu_Ruxandra_Proiect.Services
 {
     public class NoShowPredictionService : INoShowPredictionService
     {
-        private readonly GrpcChannel _channel;
+        private readonly HttpClient _httpClient;
 
-        public NoShowPredictionService()
+        public NoShowPredictionService(HttpClient httpClient)
         {
-            _channel = GrpcChannel.ForAddress("https://localhost:7051");
+            _httpClient = httpClient;
         }
 
         public async Task<NoShowApiResponse?> PredictAsync(NoShowApiInput input)
         {
-            var client = new NoShowPredictor.NoShowPredictorClient(_channel);
+            var response = await _httpClient.PostAsJsonAsync("/predict", input);
+            response.EnsureSuccessStatusCode();
 
-            var reply = await client.PredictAsync(new NoShowRequest
-            {
-                PatientAge = input.patientAge,
-                DayOfWeek = input.dayOfWeek,
-                Hour = input.hour,
-                DoctorSpecialization = input.doctorSpecialization,
-                ServiceName = input.serviceName,
-                HasReminder = input.hasReminder,
-                PreviousNoShows = input.previousNoShows
-            });
-
-            return new NoShowApiResponse
-            {
-                predictedLabel = reply.PredictedLabel,
-                score = new float[] { reply.ProbabilityYes, reply.ProbabilityNo }
-            };
+            return await response.Content.ReadFromJsonAsync<NoShowApiResponse>();
         }
     }
 }

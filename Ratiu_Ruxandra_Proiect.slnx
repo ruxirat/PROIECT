@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="../MLModel_WebApi6/MLModel_WebApi6.csproj" />
+  <Project Path="../Ratiu_Ruxandra_Proiect.GrpcService/Ratiu_Ruxandra_Proiect.GrpcService.csproj" Id="5a366d04-d857-4c32-affd-1aa231228e8f" />
   <Project Path="Ratiu_Ruxandra_Proiect.csproj" />
 </Solution>

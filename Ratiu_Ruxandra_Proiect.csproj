@@ -21,5 +21,14 @@
     <PackageReference Include="Microsoft.ML.LightGbm" Version="4.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Protobuf Include="Protos\patientsCRUD.proto" GrpcServices="Server" />
+  </ItemGroup>
+	<ItemGroup>
+		<Protobuf Include="Protos\patientsCRUD.proto" GrpcServices="Client" />
+	</ItemGroup>
 
 </Project>
