@@ -1,0 +1,104 @@
+﻿@model Ratiu_Ruxandra_Proiect.Models.NoShowPredictionViewModel
+
+@{
+    ViewData["Title"] = "No-Show Prediction";
+}
+
+<h2>No-Show Prediction</h2>
+
+<form asp-action="Index" method="post" class="mt-3">
+
+    <div class="form-group mb-2">
+        <label>Patient Age</label>
+        <input asp-for="PatientAge" type="number" min="0" max="120" class="form-control" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Day Of Week</label>
+        <select asp-for="DayOfWeek" class="form-control">
+            <option value="">-- Select day --</option>
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+        </select>
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Hour</label>
+        <input asp-for="Hour" type="number" min="0" max="23" class="form-control" />
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Doctor Specialization</label>
+        <select asp-for="DoctorSpecialization" class="form-control">
+            <option value="">-- Select specialization --</option>
+            <option>General</option>
+            <option>Orthodontics</option>
+            <option>Endodontics</option>
+            <option>Surgery</option>
+            <option>Pediatric</option>
+        </select>
+    </div>
+
+    <div class="form-group mb-2">
+        <label>Service Name</label>
+        <select asp-for="ServiceName" class="form-control">
+            <option value="">-- Select service --</option>
+            <option>Consultation</option>
+            <option>Cleaning</option>
+            <option>Filling</option>
+            <option>RootCanal</option>
+            <option>Extraction</option>
+            <option>BracesAdjust</option>
+            <option>XRay</option>
+        </select>
+    </div>
+
+    <hr />
+
+    <div class="form-group mb-2">
+        <label>Has Reminder</label>
+        <select asp-for="HasReminder" class="form-control">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Previous No-Shows</label>
+        <select asp-for="PreviousNoShows" class="form-control">
+            <option value="0">0</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Predict</button>
+</form>
+
+@if (Model.PredictedLabel.HasValue)
+{
+    <hr />
+
+    <h3>Prediction Result</h3>
+
+    @if (Model.PredictedLabel == 1)
+    {
+        <div class="alert alert-success">
+            <strong>Patient WILL show up.</strong>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-danger">
+            <strong>Patient will NOT show up.</strong>
+        </div>
+    }
+
+   
+}

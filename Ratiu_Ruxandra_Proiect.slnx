@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../MLModel_WebApi6/MLModel_WebApi6.csproj" />
+  <Project Path="Ratiu_Ruxandra_Proiect.csproj" />
+</Solution>
